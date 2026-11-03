@@ -1,0 +1,1038 @@
+/* ==========================================================================
+   OUR ANNIVERSARY EXPERIENCE - STYLESHEET
+   Accurate recreation of user's reference design
+   Mobile-First, Touch-Friendly, Alive & Responsive
+   ========================================================================== */
+
+:root {
+  --font-cursive: 'Great Vibes', cursive;
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-hand: 'Caveat', cursive;
+
+  --color-red: #e63946;
+  --color-dark-red: #8b1424;
+  --color-pink-soft: #ffe5ea;
+  --color-pink-bg: #fff0f3;
+  --color-heart-primary: #ff4d6d;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---------- RESET & BASE ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-main);
+  background-color: var(--color-pink-bg);
+  color: #333;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   SCREEN 1: THE INTRO SCREEN (Exact match to reference image 5)
+   ========================================================================== */
+.screen-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.screen-intro.hidden {
+  opacity: 0;
+  transform: scale(1.06);
+  pointer-events: none;
+}
+
+.intro-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.intro-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+/* Red Tint Overlay matching reference screenshot */
+.intro-red-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(160, 25, 45, 0.6) 0%, rgba(120, 15, 30, 0.72) 100%);
+  mix-blend-mode: multiply;
+}
+
+.screen-intro::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 35%, rgba(60, 5, 15, 0.6) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 20px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-title {
+  font-family: var(--font-cursive);
+  font-size: clamp(42px, 9vw, 84px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), 0 2px 4px rgba(0,0,0,0.7);
+  margin-bottom: 24px;
+}
+
+/* Pulsing Heart Button */
+.intro-heart-wrapper {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.intro-heart-btn {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  background: radial-gradient(circle at 35% 35%, #ff4d6d 0%, #c9184a 70%, #800f2f 100%);
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(201, 24, 74, 0.6), 0 0 40px rgba(255, 77, 109, 0.5);
+  animation: heartBeatPulse 1.4s infinite ease-in-out;
+  transition: transform 0.2s;
+}
+
+.intro-heart-btn:active {
+  transform: scale(0.92);
+}
+
+.heart-icon {
+  font-size: 38px;
+  color: #fff;
+  line-height: 1;
+  transform: translateY(-1px);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.heart-ring {
+  position: absolute;
+  inset: -10px;
+  border: 2px solid rgba(255, 117, 143, 0.6);
+  border-radius: 50%;
+  animation: ringPulse 1.8s infinite ease-out;
+  pointer-events: none;
+}
+
+.intro-subtitle {
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  opacity: 0.95;
+}
+
+/* ==========================================================================
+   SCREEN 2: THE HEART TREE & COUNTER SCREEN
+   ========================================================================== */
+.screen-tree {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #fff7f8 0%, #ffedf0 50%, #fde4e9 100%);
+  overflow: hidden;
+  z-index: 100;
+}
+
+/* Top bar matching reference screenshot (red circle buttons) */
+.tree-top-bar {
+  position: absolute;
+  top: max(14px, var(--safe-top));
+  left: 14px;
+  right: 14px;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.top-icon-btn {
+  pointer-events: auto;
+  width: 34px;
+  height: 34px;
+  background: var(--color-red);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(230, 57, 70, 0.4);
+  transition: transform 0.2s, background-color 0.2s;
+  font-size: 12px;
+}
+
+.top-icon-btn:active {
+  transform: scale(0.9);
+}
+
+.tree-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  pointer-events: auto;
+}
+
+/* Info Panel: "Letter" Heart & Time Counter */
+.tree-info-panel {
+  position: absolute;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  pointer-events: auto;
+  transition: opacity 0.5s ease;
+}
+
+/* Desktop layout: Left side */
+@media (min-width: 768px) {
+  .tree-info-panel {
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    max-width: 420px;
+  }
+}
+
+/* Mobile phone layout: Positioned gracefully right below the tree trunk, NOT pushed awkwardly to the bottom */
+@media (max-width: 767px) {
+  .tree-info-panel {
+    top: calc(var(--ground-y, 47vh) + 8px);
+    bottom: auto;
+    left: 10px;
+    right: 10px;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+  }
+  .letter-heart-btn {
+    width: 68px;
+    height: 62px;
+  }
+  .letter-text {
+    font-size: 12.5px;
+  }
+  .time-counter-block {
+    gap: 3px;
+  }
+  .time-counter-header {
+    font-size: 13px;
+  }
+  .time-counter-digits {
+    font-size: 19px;
+  }
+  .time-counter-digits strong {
+    font-size: 20px;
+  }
+  .time-counter-digits small {
+    font-size: 11.5px;
+    margin-right: 4px;
+  }
+  .click-hint-text {
+    font-size: 19px;
+  }
+  .dotted-heart-svg {
+    width: 82px;
+    height: 38px;
+  }
+  .btn-continue-pill {
+    padding: 9px 22px;
+    font-size: 13.5px;
+  }
+}
+
+/* The Red Heart "Letter" Button (Matching reference) */
+.letter-heart-box {
+  display: inline-block;
+}
+
+.letter-heart-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 72px;
+  animation: heartBeatPulse 1.8s infinite ease-in-out;
+  transition: transform 0.2s;
+}
+
+.letter-heart-btn:active {
+  transform: scale(0.92);
+}
+
+.letter-heart-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 14px rgba(230, 57, 70, 0.45));
+}
+
+.letter-text {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 13.5px;
+  letter-spacing: 0.5px;
+  transform: translateY(-2px);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Time Counter Block */
+.time-counter-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.time-counter-header {
+  font-size: 15px;
+  font-weight: 500;
+  color: #665c5c;
+  letter-spacing: 0.5px;
+}
+
+.time-counter-digits {
+  font-family: var(--font-main);
+  font-size: 24px;
+  font-weight: 800;
+  color: #2b2424;
+  line-height: 1.25;
+}
+
+.time-counter-digits strong {
+  font-size: 26px;
+  color: #1a1616;
+}
+
+.time-counter-digits small {
+  font-size: 13px;
+  font-weight: 600;
+  color: #554d4d;
+  margin-right: 6px;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 420px) {
+  .time-counter-digits {
+    font-size: 18px;
+  }
+  .time-counter-digits strong {
+    font-size: 19px;
+  }
+  .time-counter-digits small {
+    font-size: 11px;
+    margin-right: 4px;
+  }
+}
+
+/* Dotted Heart Trail & "Click here please" pointer */
+.continue-action-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-top: 4px;
+}
+
+.continue-heart-pointer,
+.continue-heart-pointer * {
+  pointer-events: none !important;
+}
+
+.continue-heart-pointer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  animation: floatPointer 2.2s infinite ease-in-out;
+  margin-bottom: 1px;
+}
+
+.click-hint-text {
+  font-family: var(--font-hand);
+  font-size: 21px;
+  font-weight: 700;
+  color: #e63946;
+  text-shadow: 0 1px 4px rgba(230, 57, 70, 0.25);
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  pointer-events: none;
+}
+
+.dotted-heart-svg {
+  width: 95px;
+  height: 44px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.dotted-trail {
+  stroke: #e63946;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 4, 4;
+  animation: dashMove 1.6s linear infinite;
+  fill: none;
+  filter: drop-shadow(0 1px 2px rgba(230, 57, 70, 0.3));
+  pointer-events: none;
+}
+
+.dotted-arrow-head {
+  stroke: #e63946;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  pointer-events: none;
+}
+
+@keyframes dashMove {
+  from { stroke-dashoffset: 16; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes floatPointer {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Continue Pill Button */
+.btn-continue-pill {
+  position: relative;
+  z-index: 50;
+  pointer-events: auto !important;
+  background: var(--color-red);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 24px;
+  font-size: 13.5px;
+  font-weight: 700;
+  font-family: var(--font-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(230, 57, 70, 0.45);
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+  animation: continuePillGlow 2.5s infinite ease-in-out;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-continue-pill:active {
+  transform: scale(0.95);
+}
+
+.continue-arrow {
+  font-size: 14px;
+  transition: transform 0.2s;
+}
+
+.btn-continue-pill:hover .continue-arrow {
+  transform: translateX(3px);
+}
+
+@keyframes continuePillGlow {
+  0%, 100% { box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4); }
+  50% { box-shadow: 0 4px 22px rgba(230, 57, 70, 0.75), 0 0 10px rgba(255, 77, 109, 0.5); }
+}
+
+/* Tree Fruit Hint */
+.tree-fruit-hint {
+  position: absolute;
+  top: max(55px, var(--safe-top));
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(230, 57, 70, 0.2);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-dark-red);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 160;
+  white-space: nowrap;
+}
+
+.tree-fruit-hint.show {
+  opacity: 1;
+}
+
+/* Tree Fruit Badge (Photo Apples on the Tree) */
+.tree-fruits-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+}
+
+.tree-fruit-badge {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28), 0 0 12px rgba(255, 77, 109, 0.65);
+  overflow: visible;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: fruitSway 3.2s infinite ease-in-out alternate;
+}
+
+/* Little green leaf stem on top of each fruit apple */
+.tree-fruit-badge::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(25deg);
+  width: 9px;
+  height: 6px;
+  background: #52b788;
+  border-radius: 8px 0 8px 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.tree-fruit-badge .fruit-inner-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  display: block;
+}
+
+.tree-fruit-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tree-fruit-badge.bloomed {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.tree-fruit-badge:active {
+  transform: translate(-50%, -50%) scale(1.22);
+}
+
+@media (max-width: 600px) {
+  .tree-fruit-badge {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* ==========================================================================
+   SCREEN 3: THE LOVE LETTER & 3D ROTATING PHOTO CAROUSEL
+   (Exact match to reference image 4)
+   ========================================================================== */
+.modal-letter {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-letter.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.letter-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(40, 15, 25, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.letter-card-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 820px;
+  max-height: 90vh;
+  margin: auto;
+  background: linear-gradient(145deg, #fffcfb 0%, #fff0f3 100%);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  padding: 24px 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Red Close Button (X) matching reference */
+.letter-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  background: var(--color-red);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(230, 57, 70, 0.45);
+  transition: transform 0.2s;
+  z-index: 50;
+}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(230, 57, 70, 0.4);
+  transition: transform 0.2s;
+  z-index: 10;
+}
+
+.letter-close-btn:active {
+  transform: scale(0.9);
+}
+
+/* Grid: Left Typewriter, Right 3D Carousel */
+.letter-card-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .letter-card-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Left: Vintage Lined Love Letter Paper Sheet */
+.letter-typewriter-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.letter-paper-sheet {
+  position: relative;
+  background: #fdfaf2;
+  background-image: repeating-linear-gradient(transparent, transparent 27px, #e8dfd2 28px);
+  background-attachment: local;
+  border-radius: 14px;
+  border: 1px solid #e8dbca;
+  padding: 28px 20px 24px 34px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), inset 0 0 35px rgba(225, 205, 170, 0.18);
+  min-height: 280px;
+  overflow: hidden;
+}
+
+/* Red notebook margin line on left */
+.paper-margin-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 24px;
+  width: 1.5px;
+  background: rgba(230, 70, 90, 0.35);
+  pointer-events: none;
+}
+
+/* Washi tape on top center */
+.paper-washi-tape {
+  position: absolute;
+  top: -6px;
+  left: 45%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 70px;
+  height: 16px;
+  background: rgba(255, 182, 193, 0.75);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Vintage Postage Stamp at top right */
+.paper-postage-stamp {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 44px;
+  border: 1.5px dashed #c98b96;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff5f7;
+  transform: rotate(3deg);
+  opacity: 0.85;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.stamp-heart {
+  font-size: 16px;
+  color: var(--color-red);
+  line-height: 1;
+}
+
+.stamp-date {
+  font-size: 9px;
+  font-weight: 700;
+  color: #8c5d67;
+  letter-spacing: 0.5px;
+}
+
+.typewriter-content {
+  font-family: var(--font-hand);
+  font-size: 21px;
+  line-height: 28px;
+  font-weight: 600;
+  color: #2b2323;
+  white-space: pre-line;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 767px) {
+  .modal-letter {
+    padding: max(10px, var(--safe-top)) 10px max(14px, var(--safe-bottom));
+    align-items: flex-start;
+  }
+  .letter-card-container {
+    max-height: 94vh;
+    padding: 16px 12px 14px 12px;
+    border-radius: 20px;
+    margin: 0 auto;
+  }
+  .letter-paper-sheet {
+    padding: 20px 10px 16px 22px;
+    background-image: repeating-linear-gradient(transparent, transparent 24px, #e8dfd2 25px);
+    min-height: auto;
+  }
+  .paper-margin-line {
+    left: 16px;
+  }
+  .typewriter-content {
+    font-size: 16.5px;
+    line-height: 25px;
+  }
+  .paper-postage-stamp {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 38px;
+  }
+  .carousel-title-row {
+    margin-bottom: 6px;
+  }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  color: var(--color-red);
+  font-weight: 800;
+  animation: cursorBlink 0.8s infinite;
+}
+
+.letter-controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-action-small {
+  background: rgba(230, 57, 70, 0.1);
+  border: 1px solid rgba(230, 57, 70, 0.25);
+  color: var(--color-dark-red);
+  border-radius: 14px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Right: 3D Spinning Photo Carousel ("photo spin non stop left to right in a circle") */
+.letter-carousel-pane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.carousel-title-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.carousel-badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-red);
+}
+
+.carousel-hint {
+  font-size: 11px;
+  color: #8c787a;
+}
+
+/* 3D Stage & Cylinder */
+.carousel-3d-stage {
+  perspective: 900px;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.carousel-3d-stage:active {
+  cursor: grabbing;
+}
+
+.carousel-3d-cylinder {
+  position: relative;
+  width: 105px;
+  height: 150px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Individual 3D Photo Card */
+.carousel-photo-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 105px;
+  height: 150px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  border: 2px solid #ffffff;
+  background: #fff;
+  cursor: pointer;
+  transform: rotateY(calc(var(--index) * (360deg / var(--total)))) translateZ(var(--radius));
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: filter 0.25s ease, opacity 0.2s ease;
+}
+
+.carousel-photo-card:hover, .carousel-photo-card:active {
+  filter: brightness(1.15);
+}
+
+.carousel-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .carousel-3d-stage {
+    height: 160px;
+    perspective: 750px;
+  }
+  .carousel-3d-cylinder {
+    width: 78px;
+    height: 114px;
+  }
+  .carousel-photo-card {
+    width: 78px;
+    height: 114px;
+    border-radius: 12px;
+  }
+}
+
+
+/* ==========================================================================
+   PHOTO ZOOM MODAL
+   ========================================================================== */
+.photo-zoom-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.photo-zoom-modal.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.zoom-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 8, 12, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.zoom-box {
+  position: relative;
+  z-index: 2;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.zoom-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.zoom-img {
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  border: 2px solid #fff;
+}
+
+.zoom-caption {
+  font-family: var(--font-hand);
+  font-size: 24px;
+  color: #ffccd5;
+  margin-top: 14px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes heartBeatPulse {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1.05); }
+  45% { transform: scale(1.2); }
+  60% { transform: scale(1); }
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fruitSway {
+  0% { transform: translate(-50%, -50%) rotate(-4deg); }
+  100% { transform: translate(-50%, -50%) rotate(4deg); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
